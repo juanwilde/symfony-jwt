@@ -1,4 +1,6 @@
 {
+    "name": "juanwilde/symfony-jwt",
+    "description": "JWT Authentication in Symfony",
     "type": "project",
     "license": "proprietary",
     "require": {
