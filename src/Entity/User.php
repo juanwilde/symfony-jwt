@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Value\Email;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Uid\Uuid;
 
@@ -16,7 +17,7 @@ class User implements UserInterface
     private \DateTime $createdAt;
     private \DateTime $updatedAt;
 
-    public function __construct(string $name, string $email, string $password)
+    public function __construct(string $name, Email $email, string $password)
     {
         $this->id = Uuid::v4()->toRfc4122();
         $this->name = $name;
@@ -46,13 +47,9 @@ class User implements UserInterface
         return $this->email;
     }
 
-    public function setEmail(string $email): void
+    public function setEmail(Email $email): void
     {
-        if (!\filter_var($email, \FILTER_VALIDATE_EMAIL)) {
-            throw new \LogicException('Invalid email');
-        }
-
-        $this->email = $email;
+        $this->email = $email->getValue();
     }
 
     public function getPassword(): string
